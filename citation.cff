@@ -1,0 +1,6 @@
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "R"
+  given-names: "Charlie"
+title: "C-Maths"
+url: "https://github.com/ch0rl/C-Maths"
