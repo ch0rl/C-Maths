@@ -68,8 +68,14 @@
 
     \newpage\pagenumbering{arabic}\setcounter{page}{1}
 
-    \include{chapters/about.tex}
-    \include{chapters/overveiw.tex}
-    \include{chapters/deep-dive.tex}
+    \include{docs/chapters/about.tex}
+    \include{docs/chapters/overveiw.tex}
+    \include{docs/chapters/deep-dive.tex}
+
+    \newpage\pagenumbering{roman}\setcounter{page}{1}
     
+    \printbibliography
+
+    \chapter{Appendix}
+        \ldots
 \end{document}
