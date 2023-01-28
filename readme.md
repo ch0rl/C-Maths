@@ -9,6 +9,6 @@
 	- [ ] Symbol history
 	- [ ] Symbolic functions
 - [ ] Functions
-- [ ] Simplification (ie., sqrt(x^2) -> +/- x)
-- [ ] LaTeX support (ie., `\cdot` -> *, `\frac{1}{2}` -> .5)
+- [ ] Simplification (ie., sqrt(x^2) = +/- x)
+- [ ] LaTeX support (ie., `\cdot` = `*`, `\frac{1}{2}` = `.5`)
 
