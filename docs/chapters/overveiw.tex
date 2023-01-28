@@ -1,0 +1,77 @@
+\chapter{Overview}
+    This chapter will focus on an overview of how the program functions and is split into sections based on the directory listing:
+    \dirtree{%
+        .1 C-Maths.
+        .2 Errors.h.
+        .2 Evaluate.h.
+        .2 Functions.h.
+        .2 Maths.c.
+        .2 Structures.h.
+        .2 Symbols.h.
+        .2 Tokenise.h.
+        .2 ToTree.h.
+    }
+
+    \section{Maths.c}
+        `Maths.c' is the main program that draws everything together. The header files can be used in isolation and this file simply provides an interface with the following.
+
+    \section{The Main Parts}
+        \subsection{Tokenising}
+            The first step in interpreting maths is to tokenise the string; this is done in `Tokeniser.h'. At a high level, this works by iterating over the string and forming `tokens' from the characters/sub-strings therein. Token types used in this program are:
+            \begin{itemize}
+                \item Null (\mlc{T_NULL})
+                \item Functions (\mlc{T_FUNC})
+                \item Operators (\mlc{T_OP})
+                \item Symbols\footnote{`Symbols' in this program are akin to variables. For example, in $n_a + 7 = y$, $n_a$ and $y$ are symbols.} (\mlc{T_SYM})
+                \item Open braces (\mlc{T_OPEN})
+                \item Close braces (\mlc{T_CLOSE})
+                \item Numbers (\mlc{T_NUM})
+            \end{itemize}
+
+        \subsection{Converting to a Tree}
+            To parse the expression, this program uses an abstract syntax tree\footnote{See: \url{https://en.wikipedia.org/wiki/Abstract_syntax_tree}.}. To form this form an array of tokens, the program uses:
+            \begin{enumerate}
+                \item The Shunting Yard Algorithm, then
+                \item A stack-based algorithm.
+            \end{enumerate}
+
+            \subsubsection*{Shunting Yard}
+                The Shunting Yard Algorithm\footnote{See: \url{https://en.wikipedia.org/wiki/Shunting_yard_algorithm}.} is used to convert an `infix' expression to a `postfix' expression. 
+
+                Infix is the common form we use to express maths -- with an operator between the operands; postfix, however, is easier for programs to parse and has the operator after the operand. For example, the infix expression $2 \cdot ( 3 + a )$ would be equivalent to the postfix $3~a~+~2~\cdot$.
+            
+            \subsubsection*{Forming The Tree}
+                Once the tokens are in postfix form, the tree can be formed. This is done through a simple algorithm that iterates over the tokens and:
+                \begin{itemize}
+                    \item If the token is an operand (number or symbol), a node with the same value is pushed to the stack.
+                    \item If the token is an operator, nodes are popped from the stack (the amount of nodes is determined by how many operands the operator expects) and a new node is pushed with the value being the operator, and the children being the operands.
+                \end{itemize}
+
+                \noindent Once complete, the last (and only) value on the stack is the head of the tree.
+        
+        \subsection{Evaluation}
+            Evaluating the tree is the (in my opinion, at least) most important part of this program -- and the part I did without consulting any normal standards; the following algorithms I made up myself. This part works in 5 main ``rounds''.
+
+            \subsubsection{Round 1 -- Replacing Symbols}
+                \textbf{Not yet implemented.}
+
+                To begin, the tree is traversed and -- consulting the symbol table -- symbols are replaced with their respective value. This value will only exist if it has been set in a previous input. For example, the user enters $a = 5 + b$ and then $a \cdot 2$; after this round, the tree would be equivalent to $(5 + b) \cdot 2$.
+
+            \subsubsection{Round 2 -- Numeric Evaluation}
+                The second round evaluates functions/operators whose children are all numeric. For example, this would parse $3 + 9$ but not $a - 2$. 
+
+            \subsubsection{Round 3+}
+                To be implemented.
+
+    \section{Misc.}
+        \subsection{Errors.h}
+            `Errors.h' provides functions for when a program produces a fatal error. For example, `\mlc{err_red_location}' which outputs the location and error passed (with colour-based formatting) and then exits. 
+
+        \subsection{Structures.h}
+            `Structures.h' provides the majority of structures used throughout, as well as the necessary accompanying functions. Such structures include:
+            \begin{itemize}
+                \item Tree nodes,
+                \item Stacks,
+                \item Queues, and
+                \item Symbols.
+            \end{itemize}

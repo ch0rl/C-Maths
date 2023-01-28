@@ -1,0 +1,75 @@
+\documentclass[titlepage]{report}
+
+% Basic
+\usepackage[hyphens]{url}                       % \url
+\usepackage[nottoc]{tocbibind}                  % Add bib to toc
+\usepackage[british]{babel}                     % Language support
+\usepackage[marginratio={1:1, 1:1}]{geometry}   % Even margins
+\interfootnotelinepenalty=10000                 % Stop footnote pagebreaks
+
+\usepackage{multirow}           % Merge cells in tabular
+\usepackage{booktabs}           % Better tables
+\usepackage{longtable}          % ... longer tables
+\usepackage{tablefootnote}
+\usepackage{ccicons}
+
+\usepackage{amsmath, amssymb}
+
+\parskip=7pt                    % Skip more in \par 
+\usepackage{array}
+
+% References
+\usepackage[
+    backend=biber, 
+    style=oxnotes-ibid,
+    maxbibnames=20,
+    backref=true
+]{biblatex}
+\addbibresource{sources.bib}
+
+% Other packages             
+\usepackage{bigfoot}                % Footnotes
+\usepackage[colorlinks]{hyperref}    % Links
+\usepackage[shortlabels]{enumitem}  % Better labels
+\usepackage[dvipsnames]{xcolor}
+
+% Font
+\usepackage{fontspec}       % Change font
+\setmainfont{Ubuntu}
+\setmonofont{Ubuntu Mono}
+\setmathsf{Fira Math}
+\urlstyle{tt}
+
+% Custom commands
+\newcommand{\fancyref}[1]{\ref{#1} (p.~\pageref{#1})}   % For referencing in-doc
+\renewcommand{\labelitemi}{\textendash}                 % Make bullets dashes
+\renewcommand{\arraystretch}{2}                         % Cleaner tables
+
+\usepackage[Glenn]{fncychap}
+\usepackage{dirtree}
+\usepackage{multicol}
+\usepackage[outputdir=.out]{minted}
+\newcommand{\mlc}{\mintinline{c}}
+\newcommand{\mlt}{\mintinline{text}}
+
+\title{\textbf{\huge{A Maths Interpreter}}\\ \ccbyncsa}
+\author{Charlie R}
+
+\begin{document}
+    \maketitle
+
+    \pagenumbering{roman}
+
+    \tableofcontents
+
+    \begin{abstract}
+        \ldots
+    \end{abstract}
+
+    \newpage\pagenumbering{arabic}\setcounter{page}{1}
+
+    \include{chapters/about.tex}
+    \include{chapters/overveiw.tex}
+    \include{chapters/deep-dive.tex}
+    
+\end{document}
