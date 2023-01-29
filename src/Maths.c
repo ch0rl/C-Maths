@@ -11,6 +11,20 @@
 #define INPUT_BUFF 50
 #define INPUT_BUFF_INC 20
 
+#define HELP_MSG "\n\
+C-Maths\n\
+-------\n\
+Simply input a mathematical expression and receive a simplified version as a tree.\n\n\
+Example:\n\
+Expression: (4 + 9) * (a - 2)\n\
+(4 + 9) * (a - 2) ≡ \n\
+                    *\n\
+                      13.000000\n\
+                      -\n\
+                        a\n\
+                        2\n\
+"
+
 /*
  * get_input
  * ---------
@@ -75,18 +89,23 @@ int main(char *argv[], int argc) {
         printf("Expression: ");
         char *input = get_input('\n');
 
-        unsigned int tok_num;
-        T_Token *tokens = Tokenise(input, &tok_num);
-        T_Tree_Node head = Form_tree(tokens, &tok_num);
-        head = Evaluate(head, sym_table, sym_n);
+        // Check for help (input[0] *will* be defined)
+        if (input[0] == '?') {
+            puts(HELP_MSG);
+        } else {
+            unsigned int tok_num;
+            T_Token *tokens = Tokenise(input, &tok_num);
+            T_Tree_Node head = Form_tree(tokens, &tok_num);
+            head = Evaluate(head, sym_table, sym_n);
 
-        printf("%s ≡ \n", input);
-        print_tree(head, 0, strlen(input) + 3);
-        puts("");
+            printf("%s ≡ \n", input);
+            print_tree(head, 0, strlen(input) + 3);
+            puts("");
 
-        // Only free if not needed anymore
-        free_tokens(tokens, tok_num);
-        free_tree(head);
+            // Only free if not needed anymore
+            free_tokens(tokens, tok_num);
+            free_tree(head);
+        }
 
         printf("Continue? \033[2m[y/N]\033[0m ");
         if ((cont = fgetc(stdin)) != '\n') {
