@@ -177,7 +177,13 @@ T_Token *Tokenise(char *expr, unsigned int *tok_num) {
     for (unsigned int i = 0; i < expr_len; i++) {
         c = expr[i];
 
-        if (is_digit(c)) {
+        if (is_digit(c) || (
+            i + 1 < expr_len && c == '-' && is_digit(expr[i+1])
+            )) {
+            // Negatives
+            bool is_neg = i + 1 < expr_len && c == '-';
+            if (is_neg) { i++; }
+
             // Numbers
             unsigned int x = i;
             bool had_point = false;
@@ -207,7 +213,7 @@ T_Token *Tokenise(char *expr, unsigned int *tok_num) {
                 tok.repr[j] = expr[i + j];
             }
             tok.repr[j + 1] = 0;
-            tok.data = strtold(tok.repr, NULL);
+            tok.data = strtold(tok.repr, NULL) * (is_neg ? -1 : 1);
 
             add_token(tokens, tok, tok_num, &tok_buff_len);
 

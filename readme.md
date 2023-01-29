@@ -3,7 +3,7 @@
 
 ## TODO
 - [x] Numeric parsing
-- [ ] Negative numbers
+- [x] Negative numbers
 - [ ] Better error messages
 - [ ] Symbols:
 	- [ ] Symbol history
