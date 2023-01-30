@@ -98,13 +98,13 @@ int main(char *argv[], int argc) {
             unsigned int tok_num;
             T_Token *tokens = Tokenise(input, &tok_num);
             T_Tree_Node head = Form_tree(tokens, &tok_num);
-            head = Evaluate(head, sym_table, sym_n);
 
             // Check assignments
             if (head.token.type == T_OP && head.token.repr[0] == '=') {
                 int assigned = handle_assignment(head, sym_table, &sym_n, &sym_table_buff);
             } else {
-                int assigned = S_NO_ASSIGNMENT;
+                int assigned = S_NO_ASSIGNMENT;                
+                head = Evaluate(head, sym_table, sym_n);
             }
             
             printf("\"%s\" ≡ \n", input);
@@ -121,7 +121,7 @@ int main(char *argv[], int argc) {
         printf("Continue? \033[2m[y/N]\033[0m ");
         if ((cont = fgetc(stdin)) != '\n') {
             // Consume newline
-            fgetc(stdin);
+            while (fgetc(stdin) != '\n') { }
         }
     }
 }
