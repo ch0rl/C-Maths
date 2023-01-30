@@ -11,7 +11,7 @@
 
 #define TOK_BUFF_N 30
 
-enum TOKENS { T_NULL, T_FUNC, T_OP, T_SYM, T_OPEN, T_CLOSE, T_NUM };
+enum TOKENS { T_NULL, T_FUNC, T_OP, T_SYM, T_OPEN, T_CLOSE, T_NUM, T_EQ };
 
 typedef struct Token {
     unsigned int type;  // See above
@@ -266,6 +266,12 @@ T_Token *Tokenise(char *expr, unsigned int *tok_num) {
 
             // Set i to new value
             i = x - 1;
+        } else if (c == '=') {
+            char *repr = (char *)malloc(sizeof(char) * 2);
+            strcpy(repr, "=");
+            
+            T_Token tok = { T_EQ, repr, 0.0 };
+            add_token(tokens, tok, tok_num, &tok_buff_len);
         }
     }
 

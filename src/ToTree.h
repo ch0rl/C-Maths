@@ -41,7 +41,7 @@ T_OP_FUNC_ARG N_ARG_LOOKUP[N_ARG_LOOKUP_LEN] = {
 int precedence(char c) {
     switch (c) {
         case '=':
-            return -1;
+            return -10;
         case '^':
             return 0;
         case '*':
@@ -155,6 +155,7 @@ void __shunting_yard(T_Token *tokens, unsigned int *tok_num) {
                 break;
 
             case T_OP:
+            case T_EQ:
                 while (op_stack->len != 0 && stack_peek(op_stack).type != T_OPEN
                     && precedence(tok.repr[0]) > precedence(stack_peek(op_stack).repr[0])
                     ) {
