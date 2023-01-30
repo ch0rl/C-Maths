@@ -41,7 +41,7 @@ T_OP_FUNC_ARG N_ARG_LOOKUP[N_ARG_LOOKUP_LEN] = {
 int precedence(char c) {
     switch (c) {
         case '=':
-            return -10;
+            return 10;
         case '^':
             return 0;
         case '*':
