@@ -9,7 +9,6 @@
     - [ ] Symbol assignment:
         - [x] Where the LHS is simply a symbol
         - [ ] With rearrangement
-	- [ ] Symbol history
 	- [ ] Symbolic functions
 - [ ] Functions
 - [ ] Simplification (ie., sqrt(x^2) = +/- x)
