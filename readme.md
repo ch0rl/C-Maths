@@ -6,6 +6,9 @@
 - [x] Negative numbers
 - [ ] Better error messages
 - [ ] Symbols:
+    - [ ] Symbol assignment:
+        - [ ] Where the LHS is simply a symbol
+        - [ ] With rearrangement
 	- [ ] Symbol history
 	- [ ] Symbolic functions
 - [ ] Functions
