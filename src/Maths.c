@@ -84,6 +84,8 @@ int main(char *argv[], int argc) {
     unsigned int sym_table_buff, sym_n = 0;
     T_Symbol *sym_table = new_sym_table(&sym_table_buff);
 
+    int assigned = 0;
+    
     char cont = 'y';
     while (cont == 'y' || cont == 'Y') {
         printf("Expression: ");
@@ -98,14 +100,23 @@ int main(char *argv[], int argc) {
             T_Tree_Node head = Form_tree(tokens, &tok_num);
             head = Evaluate(head, sym_table, sym_n);
 
-            printf("%s ≡ \n", input);
-            print_tree(head, 0, strlen(input) + 3);
+            // Check assignments
+            if (head.token.type == T_OP && head.token.repr[0] == '=') {
+                int assigned = handle_assignment(head, sym_table, &sym_n, &sym_table_buff);
+            } else {
+                int assigned = S_NO_ASSIGNMENT;
+            }
+            
+            printf("\"%s\" ≡ \n", input);
+            print_tree(head, 0, strlen(input) + 5);
             puts("");
 
             // Only free if not needed anymore
-            free_tokens(tokens, tok_num);
-            free_tree(head);
-        }
+            if (assigned == S_NO_ASSIGNMENT) {
+                free_tokens(tokens, tok_num);
+                free_tree(head);
+            }
+        }   
 
         printf("Continue? \033[2m[y/N]\033[0m ");
         if ((cont = fgetc(stdin)) != '\n') {
