@@ -46,6 +46,26 @@
 \renewcommand{\labelitemi}{\textendash}                 % Make bullets dashes
 \renewcommand{\arraystretch}{2}                         % Cleaner tables
 
+% Fancy pages
+\usepackage{fancyhdr}
+\fancypagestyle{fore-after}{%
+    \fancyhf{}
+    \lhead{\footnotesize{Charlie R}}
+    \rhead{\footnotesize{A Maths Interpreter \ccbyncsa}}
+    \cfoot{[\thepage]}
+    \setlength{\headheight}{20.96004pt}         % As recommended on compilation
+    \addtolength{\topmargin}{-8.96004pt}        % As above
+}
+\fancypagestyle{main}{%
+    \fancyhf{}
+    \lhead{\footnotesize{Charlie R}}
+    \rhead{\footnotesize{\leftmark}}
+    \cfoot{[\thepage]}
+    \setlength{\headheight}{20.96004pt}         % As recommended on compilation
+    \addtolength{\topmargin}{-8.96004pt}        % As above
+}
+\pagestyle{fore-after}
+
 \usepackage[Glenn]{fncychap}
 \usepackage{dirtree}
 \usepackage{multicol}
@@ -70,6 +90,7 @@
     \end{abstract}
 
     \newpage\pagenumbering{arabic}\setcounter{page}{1}
+    \pagestyle{main}
 
     \include{chapters/about.tex}
     \include{chapters/overveiw.tex}
@@ -77,7 +98,8 @@
     \include{chapters/development.tex}
 
     \newpage\pagenumbering{roman}\setcounter{page}{1}
-    
+    \pagestyle{fore-after}
+
     \printbibliography
 
     \chapter{Appendix}
