@@ -53,8 +53,6 @@
             Evaluating the tree is the (in my opinion, at least) most important part of this program -- and the part I did without consulting any normal standards; the following algorithms I made up myself. This part works in 5 main ``rounds''.
 
             \subsubsection{Round 1 -- Replacing Symbols}
-                \textbf{Not yet implemented.}
-
                 To begin, the tree is traversed and -- consulting the symbol table -- symbols are replaced with their respective value. This value will only exist if it has been set in a previous input. For example, the user enters $a = 5 + b$ and then $a \cdot 2$; after this round, the tree would be equivalent to $(5 + b) \cdot 2$.
 
             \subsubsection{Round 2 -- Numeric Evaluation}

@@ -6,14 +6,10 @@
         
         \subsection*{Functions.h}
             \begin{itemize}
-                \item Implement the necessary functions for the backend of the operator; these functions must have one of the following signatures, depending on whether it is numeric or not: \\
-                    \begin{table}[H]
-                        \begin{tabular}{c | c}
-                            Numeric & \mlc{T_Tree_Node function(T_Tree_Node *args, unsigned int arg_n)} \\
-                            Symbolic & Not yet implemented
-                        \end{tabular}
-                        \label{Function signatures for operator implementations.}
-                    \end{table}
+                \item Implement the necessary functions for the backend of the operator; these functions must have the following signature\footnote{\mlc{arg_n} will be known for most functions but is there to allow for functions with multiple, different, numbers of arguments.}\footnote{Examples of how these functions should work can be seen in Functions.h.}:
+                    \begin{minted}{c}
+T_Tree_Node function(T_Tree_Node *args, unsigned int arg_n)                     
+                    \end{minted}
                 \item Add to the switch-case in the appropriate function: \\
                     \begin{table}[H]
                         \begin{tabular}{c | c}
