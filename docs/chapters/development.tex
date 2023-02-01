@@ -1,0 +1,38 @@
+\chapter{Development}
+    The following are instructions for adding to this program.
+
+    \section{Adding an Operator (length 1)}
+        To add an operator that is represented by one character, you must do the following:
+        
+        \subsection*{Functions.h}
+            \begin{itemize}
+                \item Implement the necessary functions for the backend of the operator; these functions must have one of the following signatures, depending on whether it is numeric or not: \\
+                    \begin{table}[H]
+                        \begin{tabular}{c | c}
+                            Numeric & \mlc{T_Tree_Node function(T_Tree_Node *args, unsigned int arg_n)} \\
+                            Symbolic & Not yet implemented
+                        \end{tabular}
+                        \label{Function signatures for operator implementations.}
+                    \end{table}
+                \item Add to the switch-case in the appropriate function: \\
+                    \begin{table}[H]
+                        \begin{tabular}{c | c}
+                            Numeric & \mlc{get_numeric_func} \\
+                            Symbolic & Not yet implemented 
+                        \end{tabular}
+                        \label{Function containing translations from operator representation to function.}
+                    \end{table}
+            \end{itemize}
+        
+        \subsection*{Tokenise.h}
+            \begin{itemize}
+                \item Add to the \mlc{OPERATORS} array.
+                \item Increment \mlc{OP_NUM}.
+            \end{itemize}
+
+        \subsection*{ToTree.h}
+            \begin{itemize}
+                \item Add to the \mlc{N_ARG_LOOKUP} array accordingly (\mlc{{<op/func>, <op/func length>, <number of arguments>}}).
+                \item Increment \mlc{N_ARG_LOOKUP_LEN}.
+                \item Add to the switch-case in the \mlc{precedence} function.
+            \end{itemize}
