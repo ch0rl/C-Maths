@@ -16,7 +16,7 @@ typedef struct OP_FUNC_ARG {
     unsigned int arg_num;
 } T_OP_FUNC_ARG;
 
-#define N_ARG_LOOKUP_LEN 6
+#define N_ARG_LOOKUP_LEN 7
 // {<op/func>, <op/func length>, <number of arguments>}
 T_OP_FUNC_ARG N_ARG_LOOKUP[N_ARG_LOOKUP_LEN] = {
     {"+", 1, 2},
@@ -24,7 +24,8 @@ T_OP_FUNC_ARG N_ARG_LOOKUP[N_ARG_LOOKUP_LEN] = {
     {"*", 1, 2},
     {"/", 1, 2},
     {"^", 1, 2},
-    {"=", 1, 2}
+    {"=", 1, 2},
+    {"%", 1, 1}
 };
 
 /*
@@ -46,6 +47,7 @@ int precedence(char c) {
             return 0;
         case '*':
         case '/':
+        case '%':
             return 1;
         case '+':
         case '-':

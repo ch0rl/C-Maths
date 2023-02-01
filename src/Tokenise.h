@@ -20,8 +20,8 @@ typedef struct Token {
     long double data;  // If type == num
 } T_Token;
 
-char OPERATORS[] = { '+', '-', '*', '/', '^', '=' };
-#define OP_NUM 6
+char OPERATORS[] = { '+', '-', '*', '/', '^', '=', '%' };
+#define OP_NUM 7
 
 
 /* Returns if `x` is in `OPERATORS` */

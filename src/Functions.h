@@ -60,6 +60,12 @@ T_Tree_Node N_pow(T_Tree_Node *args, unsigned int arg_n) {
     return new_tree_node((T_Token){T_NUM, double_to_string(x), x});
 }
 
+T_Tree_Node N_percent(T_Tree_Node *args, unsigned int arg_n) {
+    long double x = args[0].token.data / 100;
+
+    return new_tree_node((T_Token){T_NUM, double_to_string(x), x});
+}
+
 // repr -> function
 typedef T_Tree_Node(*T_N_func)(T_Tree_Node *, unsigned int);
 
@@ -77,6 +83,8 @@ T_N_func get_numeric_func(char *repr) {
                     return &N_div;
                 case '^':
                     return &N_pow;
+                case '%':
+                    return &N_percent;
             }
     }
 }
